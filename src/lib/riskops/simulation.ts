@@ -4,8 +4,8 @@ const exponent = Math.log(16.43 / 23.28) / Math.log(.7);
 export function policyAt(cutoff:number) {
  const approval = Math.min(.995,Math.max(.01, cutoff<=BASE_CUTOFF ? .7*Math.pow(cutoff/BASE_CUTOFF,1.55) : .7+.3*Math.pow((cutoff-BASE_CUTOFF)/(.9-BASE_CUTOFF),.75)));
  const defaultRate = 23.28*Math.pow(approval,exponent);
- const screened = 100*(1-approval*defaultRate/23.28);
- return { approval:approval*100,rejection:(1-approval)*100,defaultRate,screened:cutoff===BASE_CUTOFF?50.62:screened,suppliedSavings:398000000*(screened/50.62) };
+ const screened = cutoff===BASE_CUTOFF?50.62:100*(1-approval*defaultRate/23.28);
+ return { approval:approval*100,rejection:(1-approval)*100,defaultRate,screened,suppliedSavings:398000000*(screened/50.62) };
 }
 export function frontierData(){return Array.from({length:21},(_,i)=>({name:i*5,value:i===0?0:23.28*Math.pow(i/20,exponent)}));}
 export const applicantSchema=z.object({loan:z.number().min(1000).max(40000),term:z.enum(['36','60']),income:z.number().min(15000).max(300000),dti:z.number().min(0).max(40),fico:z.number().min(600).max(850),history:z.number().min(1).max(40),employment:z.enum(['<1','1','2','3','4','5','6','7','8','9','10+','Unknown']),home:z.enum(['RENT','MORTGAGE','OWN']),verification:z.enum(['Not Verified','Source Verified','Verified']),purpose:z.enum(['Debt Consolidation','Credit Card','Small Business','Home Improvement']),utilization:z.number().min(0).max(100),inquiries:z.number().int().min(0).max(10)});
