@@ -10,33 +10,115 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DataEngineeringRouteImport } from './routes/data-engineering'
+import { Route as FeaturesRouteImport } from './routes/features'
+import { Route as GovernanceRouteImport } from './routes/governance'
+import { Route as ModelsRouteImport } from './routes/models'
+import { Route as PolicyRouteImport } from './routes/policy'
+import { Route as UnderwritingRouteImport } from './routes/underwriting'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DataEngineeringRoute = DataEngineeringRouteImport.update({
+  id: '/data-engineering',
+  path: '/data-engineering',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FeaturesRoute = FeaturesRouteImport.update({
+  id: '/features',
+  path: '/features',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GovernanceRoute = GovernanceRouteImport.update({
+  id: '/governance',
+  path: '/governance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ModelsRoute = ModelsRouteImport.update({
+  id: '/models',
+  path: '/models',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PolicyRoute = PolicyRouteImport.update({
+  id: '/policy',
+  path: '/policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UnderwritingRoute = UnderwritingRouteImport.update({
+  id: '/underwriting',
+  path: '/underwriting',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/data-engineering': typeof DataEngineeringRoute
+  '/features': typeof FeaturesRoute
+  '/governance': typeof GovernanceRoute
+  '/models': typeof ModelsRoute
+  '/policy': typeof PolicyRoute
+  '/underwriting': typeof UnderwritingRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/data-engineering': typeof DataEngineeringRoute
+  '/features': typeof FeaturesRoute
+  '/governance': typeof GovernanceRoute
+  '/models': typeof ModelsRoute
+  '/policy': typeof PolicyRoute
+  '/underwriting': typeof UnderwritingRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/data-engineering': typeof DataEngineeringRoute
+  '/features': typeof FeaturesRoute
+  '/governance': typeof GovernanceRoute
+  '/models': typeof ModelsRoute
+  '/policy': typeof PolicyRoute
+  '/underwriting': typeof UnderwritingRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/data-engineering'
+    | '/features'
+    | '/governance'
+    | '/models'
+    | '/policy'
+    | '/underwriting'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/data-engineering'
+    | '/features'
+    | '/governance'
+    | '/models'
+    | '/policy'
+    | '/underwriting'
+  id:
+    | '__root__'
+    | '/'
+    | '/data-engineering'
+    | '/features'
+    | '/governance'
+    | '/models'
+    | '/policy'
+    | '/underwriting'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DataEngineeringRoute: typeof DataEngineeringRoute
+  FeaturesRoute: typeof FeaturesRoute
+  GovernanceRoute: typeof GovernanceRoute
+  ModelsRoute: typeof ModelsRoute
+  PolicyRoute: typeof PolicyRoute
+  UnderwritingRoute: typeof UnderwritingRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +130,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/data-engineering': {
+      id: '/data-engineering'
+      path: '/data-engineering'
+      fullPath: '/data-engineering'
+      preLoaderRoute: typeof DataEngineeringRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/features': {
+      id: '/features'
+      path: '/features'
+      fullPath: '/features'
+      preLoaderRoute: typeof FeaturesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/governance': {
+      id: '/governance'
+      path: '/governance'
+      fullPath: '/governance'
+      preLoaderRoute: typeof GovernanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/models': {
+      id: '/models'
+      path: '/models'
+      fullPath: '/models'
+      preLoaderRoute: typeof ModelsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/policy': {
+      id: '/policy'
+      path: '/policy'
+      fullPath: '/policy'
+      preLoaderRoute: typeof PolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/underwriting': {
+      id: '/underwriting'
+      path: '/underwriting'
+      fullPath: '/underwriting'
+      preLoaderRoute: typeof UnderwritingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DataEngineeringRoute: DataEngineeringRoute,
+  FeaturesRoute: FeaturesRoute,
+  GovernanceRoute: GovernanceRoute,
+  ModelsRoute: ModelsRoute,
+  PolicyRoute: PolicyRoute,
+  UnderwritingRoute: UnderwritingRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
